@@ -57,6 +57,18 @@ class CSVReader
     end
     hash
   end
+
+  def read
+    f = File.new(@fname, "r")
+    self.headers = f.readline
+
+    while (!f.eof? and next_line = f.readline)
+      values = next_line.split(",")
+      #code to clean up values should go here
+      hash = create_hash(values)
+      yield(hash)
+    end
+  end
 end
 
 #p "CamelCaseString".underscore 
