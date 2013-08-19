@@ -5,6 +5,7 @@ class Analytics
     set_options
   end
 
+  #in my opinion, this "GUI" stuff belongs in a separate file, as it's unrelated to "analyzing"
   def set_options
     @options = []
     @options << {menu_id: 1, menu_title: "Areas count", method: :how_many}

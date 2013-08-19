@@ -30,15 +30,6 @@ class CSVReader
     end
   end
 
-#unclean: 1,"00704","STANDARD","PARC PARQUE","PR","NOT ACCEPTABLE",17.96,-66.22,0.38,-0.87,0.30,"NA","US","Parc Parque, PR","NA-US-PR-PARC PARQUE","false",,,,
-#will be read in line by line, and turned into a string; therefore, to make a clean string array, something like...
-
-#.gsub(",,", ",\"\",")
-#.chop if string[-1] == ","
-#.gsub("\"", "")
-#.split(",")
-#array.map! {|x| x.to_s}
-
   def create_hash(array)
     #requires scrubbed input, a clean array of strings
 
@@ -64,7 +55,7 @@ class CSVReader
 
     while (!f.eof? and next_line = f.readline)
       values = next_line.split(",")
-      #code to clean up values should go here
+      #ok, now I see how it's being done. technically don't need any cleanup code, but it's still not super fault-tolerant
       hash = create_hash(values)
       yield(hash)
     end
@@ -76,3 +67,4 @@ end
 #csv.headers = '"RecordNumber","Zipcode","ZipCodeType","City","State","LocationType","Lat","Long","Xaxis","Yaxis","Zaxis","WorldRegion","Country","LocationText","Location","Decommisioned","TaxReturnsFiled","EstimatedPopulation","TotalWages","Notes"'
 #p csv.headers
 #p csv.create_hash(["1","00704","STANDARD","PARC PARQUE","PR","NOT ACCEPTABLE","17.96","-66.22","0.38","-0.87","0.30","NA","US","Parc Parque, PR","NA-US-PR-PARC PARQUE","false","","","",""])
+#unclean: 1,"00704","STANDARD","PARC PARQUE","PR","NOT ACCEPTABLE",17.96,-66.22,0.38,-0.87,0.30,"NA","US","Parc Parque, PR","NA-US-PR-PARC PARQUE","false",,,,
